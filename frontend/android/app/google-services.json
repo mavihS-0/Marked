@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "667381478465",
+    "project_id": "marked-b1ac1",
+    "storage_bucket": "marked-b1ac1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667381478465:android:797c8a374ff463750e42c0",
+        "android_client_info": {
+          "package_name": "com.example.marked"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyUabf5Ls_XMV33YAbYYtfz7VCWMSsjO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
