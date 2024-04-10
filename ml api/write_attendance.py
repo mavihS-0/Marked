@@ -6,7 +6,7 @@ import csv
 from datetime import datetime
 from face_encodings import get_face_encodings
 
-def mark_attendance(image_names, known_face_encoding):
+def mark_attendance(image_names, known_face_encoding,imgURL):
     now = datetime.now()
     current_date = now.strftime("%Y-%m-%d")
     print(current_date, "  ", now)
@@ -20,7 +20,7 @@ def mark_attendance(image_names, known_face_encoding):
     lnwriter = csv.writer(f)
 
     # Download and load the image from the URL
-    image_url = "https://st1.latestly.com/wp-content/uploads/2024/01/Hrithik-Roshan-Deepika-Padukone-and-Anil-Kapoor.jpg"
+    image_url = imgURL
     response = urllib.request.urlopen(image_url)
     image_data = response.read()
     nparr = np.frombuffer(image_data, np.uint8)
