@@ -1,8 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'attendance_page.dart';
-import 'home_page.dart';
+import 'presentation/screens/attendance_page.dart';
+import 'presentation/screens/home_page.dart';
+import 'package:get/get.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -12,17 +19,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
         hoverColor: Color(0xFF6f4dea),
       ),
-      initialRoute: '/HomePage',
       debugShowCheckedModeBanner: false,
-      routes: {
-        '/HomePage': (context) => const HomePage(),
-        '/Attendance': (context) => const AttendancePage(),
-      },
+      home: const HomePage(),
     );
   }
 }
