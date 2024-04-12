@@ -12,9 +12,10 @@ app = Flask(__name__)
 
 image_names, known_face_encoding = get_face_encodings()
 
-@app.route('/')
+@app.route('/',methods = ['GET'])
 def home():
-    return "Welcome to Face Attendance System"
+    if request.method == 'GET':
+        return jsonify('Welcome to the face recognition API'),200
 
 @app.route('/encodings',methods=['GET','POST'])
 def get_encodings():
@@ -30,7 +31,10 @@ def get_attendance():
         attendees = []
         if request.args.get('docId'):
             docId = request.args.get('docId')
-            doc_ref = db.collection("attendance").document(docId)
+            try: 
+                doc_ref = db.collection("attendance").document(docId)
+            except:
+                return jsonify('Document not found'),404
             doc = doc_ref.get().to_dict()
             for imgUrl in doc['images']:
                 attendees.extend(mark_attendance(image_names, known_face_encoding,imgUrl))
@@ -38,9 +42,6 @@ def get_attendance():
             attendees.sort()
             doc['attendees'] = attendees
             doc_ref.set(doc)
-        if(len(attendees)==0):
-            return jsonify('No data found'),404
-        else: 
-            return jsonify('Data written'),200
+        return jsonify('Data written'),200
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000,debug=True)

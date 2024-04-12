@@ -17,14 +17,13 @@ class Attendance{
 
   factory Attendance.fromMap(Map<String, dynamic> map){
     DateTime dateTime = map['time'].toDate();
-    String date = '${dateTime.day}/${dateTime.month}/${dateTime.year}';
     String time = '${dateTime.hour}:${dateTime.minute}';
     map['attendees'].sort();
     return Attendance(
       id: map['id'],
       attendees: List<String>.from(map['attendees']),
       images: List<String>.from(map['images']),
-      date: date,
+      date: map['date'],
       time: time,
       slot: map['slot'],
     );

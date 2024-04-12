@@ -15,7 +15,7 @@ class HomePageController extends GetxController {
   }
 
   void fetchData() {
-    attendanceRef.snapshots().listen((event) {
+    attendanceRef.orderBy('time',descending: true).snapshots().listen((event) {
       attendance.clear();
       event.docs.forEach((element) {
         Map<String,dynamic> dataMap = element.data() as Map<String,dynamic>;

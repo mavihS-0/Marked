@@ -16,7 +16,20 @@ class AttendancePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(homePageController.attendance[attendanceIndex].slot, ),
+        title: Row(
+          children: [
+            Text(homePageController.attendance[attendanceIndex].slot),
+            SizedBox(width: 20,),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: Color(0xff0d51ad),
+              ),
+              child: Text(homePageController.attendance[attendanceIndex].date,style: TextStyle(fontSize: 15),),
+            )
+          ],
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.image),
@@ -30,7 +43,9 @@ class AttendancePage extends StatelessWidget {
         builder: (controller){
           return Container(
             margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: ListView.builder(itemBuilder: (context, index){
+            child: homePageController.attendance[attendanceIndex].attendees.isEmpty ?
+            Center(child: Text('No attendees',style: TextStyle(fontSize: 20),),) :
+            ListView.builder(itemBuilder: (context, index){
               return PersonCard(
                 regNo: homePageController.attendance[attendanceIndex].attendees[index],
                 docId: homePageController.attendance[attendanceIndex].id,
@@ -68,7 +83,9 @@ class AttendancePage extends StatelessWidget {
                   regNoController.text = '';
                   Get.back();
                 },
-                child: Text('Add'),
+                child: Text('Add', style: TextStyle(
+                    color: Color(0xFF8196E8)
+                ),),
               ),
             ],
           );

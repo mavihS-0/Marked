@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mark_it/controllers/add_attendance_controller.dart';
 import 'package:mark_it/controllers/home_page_controller.dart';
 import 'package:get/get.dart';
+import 'package:mark_it/presentation/screens/add_attendance_page.dart';
 import '../util/date_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -32,7 +34,9 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Color(0xFF2B3871),
-        onPressed: (){},
+        onPressed: (){
+          Get.to(() => ImagePickerScreen());
+        },
         label: const Text('Add'),
         icon: const Icon(Icons.add, color: Colors.white, size: 25),
       ),
