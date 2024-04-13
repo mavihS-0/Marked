@@ -27,7 +27,32 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Images'),
+        title: InkWell(
+          onTap: (){
+            Get.defaultDialog(
+              title: 'Set URL',
+              titlePadding: EdgeInsets.only(top: 20),
+              content: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
+                child: TextField(
+                  controller: addAttendanceController.urlController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter URL',
+                  ),
+                ),
+              ),
+              confirm: ElevatedButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('Confirm', style: TextStyle(
+                    color: Color(0xFF8196E8)
+                ),),
+              ),
+            );
+          },
+            child: Text('Images')
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),

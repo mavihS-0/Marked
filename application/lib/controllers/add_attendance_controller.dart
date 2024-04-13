@@ -14,6 +14,7 @@ class AddAttendanceController extends GetxController {
   TextEditingController slotController = TextEditingController();
   List <String> selectedImages = [];
   final ImagePicker _picker = ImagePicker();
+  TextEditingController urlController = TextEditingController(text: 'http://192.168.29.233:5000');
   CollectionReference attendanceRef = FirebaseFirestore.instance.collection('attendance');
   String docID = '';
 
@@ -51,7 +52,7 @@ class AddAttendanceController extends GetxController {
     catch(e){
       Get.snackbar('Error', e.toString());
     }
-    var url = Uri.parse('http://192.168.29.233:5000/attendance?docId=$docID');
+    var url = Uri.parse('${urlController.text}/attendance?docId=$docID');
     var response =  await http.get(url);
     if (response.statusCode == 200 ){
       Get.snackbar('Success', 'Attendance added successfully');
