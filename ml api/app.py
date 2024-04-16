@@ -1,10 +1,12 @@
 from face_encodings import get_face_encodings
 from write_attendance import mark_attendance
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,send_file
 import firebase_admin
+import csv
+import os
 from firebase_admin import credentials
 from firebase_admin import firestore
-cred = credentials.Certificate("marked-b1ac1-firebase-adminsdk-am0i3-70dda8ce76.json")
+cred = credentials.Certificate("marked-b1ac1-firebase-adminsdk-am0i3-5580de3b5b.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
@@ -41,7 +43,28 @@ def get_attendance():
             attendees = list(set(attendees))
             attendees.sort()
             doc['attendees'] = attendees
+            fileName = doc['slot']+'_'+doc['date'].replace('/','_')+'.csv'
+            f = open('files/'+fileName, 'w+', newline='')
+            lnwriter = csv.writer(f)
+            lnwriter.writerow(['Reg No'])
+            for student in attendees:
+                lnwriter.writerow([student])
+            f.close()
             doc_ref.set(doc)
         return jsonify('Data written'),200
+
+@app.route('/download', methods=['GET'])
+def download_file():
+
+    slot = request.args.get('slot')
+    date = request.args.get('date')
+
+    project_directory = os.path.abspath(os.path.dirname(__file__))
+    file_path = os.path.join(project_directory, 'files', slot+'_'+date+'.csv')
+    print(file_path)
+    filename = str(slot+'_'+date+'.csv')
+
+    return send_file(file_path, download_name =filename, as_attachment=True)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000,debug=True)

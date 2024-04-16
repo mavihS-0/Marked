@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:csv/csv.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:open_app_file/open_app_file.dart';
 
 import '../data/attendance_model.dart';
 
@@ -36,5 +40,33 @@ class HomePageController extends GetxController {
     attendanceRef.doc(docId).update({
       'attendees': FieldValue.arrayUnion([regNo])
     });
+  }
+
+  void downloadAttendance(int attendanceIndex) async {
+    try{
+      List<String> data = ['Reg No'];
+      data.addAll(attendance[attendanceIndex].attendees);
+      List<List<dynamic>> csvData = [
+        ['Reg No'], // Header
+        ...attendance[attendanceIndex].attendees.map((row) => [row]) // Rows
+      ];
+      String csv = const ListToCsvConverter().convert(csvData);
+      // final directory = await getDownloadsDirectory();
+      final dateWithUnderscore = attendance[attendanceIndex].date.replaceAll('/', '_');
+      final fileName = '${attendance[attendanceIndex].slot}_$dateWithUnderscore.csv';
+      final filePath = '/storage/emulated/0/Download/Marked/$fileName';
+      Directory directory = Directory('/storage/emulated/0/Download/Marked/');
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+      File file = File(filePath);
+      await file.writeAsString(csv);
+      Get.snackbar('File Saved Successfully', 'Path: Download/Marked/$fileName');
+      OpenAppFile.open(filePath);
+    }
+    catch(e){
+      Get.snackbar('Error', e.toString());
+    }
+
   }
 }

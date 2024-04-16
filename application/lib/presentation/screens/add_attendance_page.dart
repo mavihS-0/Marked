@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:mark_it/controllers/add_attendance_controller.dart';
+import 'package:photo_view/photo_view.dart';
 
 class ImagePickerScreen extends StatefulWidget {
   @override
@@ -95,9 +96,11 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                 onTapOutside: (event){
                                   Get.back();
                                 },
-                                child: Image.file(
-                                  File(addAttendanceController.selectedImages[index]
-                                  ),
+                                child: PhotoView(
+                                  imageProvider: FileImage(
+                                    File(addAttendanceController.selectedImages[index]),
+                                ),
+                                  tightMode: true,
                                 ),
                               ),
                             ),

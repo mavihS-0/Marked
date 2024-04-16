@@ -2,22 +2,13 @@ import numpy as np
 import urllib.request
 import cv2
 import face_recognition
-import csv
 from datetime import datetime
 from face_encodings import get_face_encodings
 
 def mark_attendance(image_names, known_face_encoding,imgURL):
-    now = datetime.now()
-    current_date = now.strftime("%Y-%m-%d")
-    print(current_date, "  ", now)
-
     l1 =[]
 
-    students = image_names.copy()
-
-    file_name = current_date + '.csv'
-    f = open(file_name, 'w+', newline='')
-    lnwriter = csv.writer(f)
+    students = image_names.copy()    
 
     # Download and load the image from the URL
     image_url = imgURL
@@ -47,8 +38,4 @@ def mark_attendance(image_names, known_face_encoding,imgURL):
             if name in students:
                 students.remove(name)
                 l1.append(name)
-                current_time = now.strftime("%H-%M-%S")
-                lnwriter.writerow([name, current_time])
     return l1
-
-    f.close()

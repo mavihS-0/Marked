@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mark_it/controllers/home_page_controller.dart';
 import 'package:mark_it/presentation/util/person_card.dart';
 
+
 import 'image_screen.dart';
 
 class AttendancePage extends StatelessWidget {
@@ -31,6 +32,12 @@ class AttendancePage extends StatelessWidget {
           ],
         ),
         actions: [
+          IconButton(
+            icon: Icon(Icons.download_rounded),
+            onPressed: () {
+                homePageController.downloadAttendance(attendanceIndex);
+            },
+          ),
           IconButton(
             icon: Icon(Icons.image),
             onPressed: () {

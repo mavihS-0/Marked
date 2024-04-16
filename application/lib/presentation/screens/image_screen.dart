@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
+import 'package:photo_view/photo_view.dart';
 
 class ImageScreen extends StatelessWidget {
   final List<String> imageUrls;
@@ -45,11 +46,11 @@ class ImageScreen extends StatelessWidget {
                             onTapOutside: (event){
                               Get.back();
                             },
-                            child: CachedNetworkImage(
-                              imageUrl: imageUrls[index],
-                              placeholder: (context, url) => CircularProgressIndicator(),
-                              errorWidget: (context, url, error) => Icon(Icons.error),
-                              fit: BoxFit.contain,
+                            child: PhotoView(
+                              imageProvider: CachedNetworkImageProvider(
+                                imageUrls[index]
+                              ),
+                              tightMode: true,
                             ),
                           ),
                         ),
