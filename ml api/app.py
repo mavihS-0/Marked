@@ -43,7 +43,7 @@ def get_attendance():
             attendees = list(set(attendees))
             attendees.sort()
             doc['attendees'] = attendees
-            fileName = doc['slot']+'_'+doc['date'].replace('/','_')+'.csv'
+            fileName = doc['slot'].replace('+','_')+'_'+doc['date'].replace('/','_')+'.csv'
             f = open('files/'+fileName, 'w+', newline='')
             lnwriter = csv.writer(f)
             lnwriter.writerow(['Reg No'])

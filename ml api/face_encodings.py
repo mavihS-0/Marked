@@ -4,7 +4,7 @@ import os
 def get_face_encodings():
     folder_path = r"E:\DISK_DRIVE\marked\Marked\ml api\known images"
 
-    image_names = []
+    image_names = ['21BCE6196','21BCE0001','21BCE0002','21BCE5780','21BCE0003','21BCE5319','21BCE0004','21BCE6205','21BCE0005','21BCE1619','21BCE0006','21BCE0007','21BCE0008','21BCE6204','21BCE0009']
 
     known_face_encoding = []
 
@@ -21,7 +21,6 @@ def get_face_encodings():
                 
                 known_face_encoding.append(list(face_encoding))
                 
-                image_names.append(filename)
             else:
                 print(f"No faces found in {filename}")
 
