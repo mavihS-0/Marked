@@ -3,7 +3,6 @@ import urllib.request
 import cv2
 import face_recognition
 from datetime import datetime
-from face_encodings import get_face_encodings
 
 def mark_attendance(image_names, known_face_encoding,imgURL):
     l1 =[]

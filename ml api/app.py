@@ -1,9 +1,10 @@
-from face_encodings import get_face_encodings
 from write_attendance import mark_attendance
 from flask import Flask, request, jsonify,send_file
 import firebase_admin
 import csv
 import os
+import json
+import numpy as np
 from firebase_admin import credentials
 from firebase_admin import firestore
 cred = credentials.Certificate("marked-b1ac1-firebase-adminsdk-am0i3-5580de3b5b.json")
@@ -12,20 +13,29 @@ db = firestore.client()
 
 app = Flask(__name__)
 
-image_names, known_face_encoding = get_face_encodings()
+def load_face_encodings(input_file):
+    with open(input_file, 'r') as json_file:
+        data = json.load(json_file)
+
+    face_encodings = np.array(data['face_encodings'])
+
+    return data['filenames'], face_encodings
+
+image_names, known_face_encoding = load_face_encodings('face_encodings.json')
+
+image_names = [name.split('.')[0] for name in image_names]
 
 @app.route('/',methods = ['GET'])
 def home():
     if request.method == 'GET':
         return jsonify('Welcome to the face recognition API'),200
 
-@app.route('/encodings',methods=['GET','POST'])
+@app.route('/encodings',methods=['GET'])
 def get_encodings():
-    if request.method == 'POST':
-        image_names, known_face_encoding = get_face_encodings()
-        return jsonify({'image_names':image_names,'known_face_encoding':known_face_encoding}),201
     if request.method == 'GET':
-         return jsonify({'image_names':image_names,'known_face_encoding':known_face_encoding}),200
+         with open('face_encodings.json', 'r') as json_file:
+            data = json.load(json_file)
+         return data,200
 
 @app.route('/attendance')
 def get_attendance():
