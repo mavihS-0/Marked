@@ -1,5 +1,5 @@
 # Marked
-## Snapshot based attendance app
+## Snapshot based attendance app using Flask and Flutter
 
 ### How to use 
 - Put the pictures of attendees in 'attendance system api>known images'.
