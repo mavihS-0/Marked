@@ -2,7 +2,7 @@
 ## Snapshot based attendance app
 
 ### How to use 
-- Put the pictures of attendees in 'attendance model api>known images'.
+- Put the pictures of attendees in 'attendance system api>known images'.
 - Run 'attendance system api>face_encodings.py' to generate face encodings.
 - Run 'attendance system api>app.py' to deploy api to localhost.
 - Download the latest version of marked app.
