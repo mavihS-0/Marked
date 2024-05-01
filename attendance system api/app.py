@@ -54,9 +54,9 @@ def get_attendance():
             attendees.sort()
             doc['attendees'] = attendees
             fileName = doc['slot'].replace('+','_')+'_'+doc['date'].replace('/','_')+'.csv'
-            f = open('files/'+fileName, 'w+', newline='')
+            f = open('output_files/'+fileName, 'w+', newline='')
             lnwriter = csv.writer(f)
-            lnwriter.writerow(['Reg No'])
+            lnwriter.writerow(['Name'])
             for student in attendees:
                 lnwriter.writerow([student])
             f.close()
