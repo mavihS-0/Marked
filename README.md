@@ -5,7 +5,7 @@
 - Put the pictures of attendees in 'attendance system api>known images'.
 - Run 'attendance system api>face_encodings.py' to generate face encodings.
 - Run 'attendance system api>app.py' to deploy api to localhost.
-- Download the latest version of marked app.
+- Download the latest version of marked app. [Download apk](https://github.com/aditiiixx/Marked/releases/download/Marked/Marked.apk)
 - Tap on add attendance.
 - Upload the snapshot of class.
 - Add the slot and date.
