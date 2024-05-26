@@ -1,3 +1,4 @@
+![app icon](https://cdn.discordapp.com/attachments/1010602676909776949/1244162870074146846/icons.png?ex=66541c77&is=6652caf7&hm=d2c787ce53c09fb7255bd39e70ebcdfd8304d011aed305df1dee8f3368a36450&)
 # Marked
 ## Snapshot based attendance app using Flask and Flutter
 
